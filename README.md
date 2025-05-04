@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Documentação de Uso - To-Do App
 
-## Getting Started
+## Descrição Geral
 
-First, run the development server:
+Este projeto consiste em uma aplicação To-Do composta por:
+
+- Uma API REST em Spring Boot com persistência em MySQL.
+- Um frontend em Next.js + TypeScript + Tailwind + Shadcn UI.
+
+Permite operações CRUD e segue boas práticas de API REST.
+
+---
+
+## Tecnologias Utilizadas
+
+### Backend (Spring Boot)
+
+- Java 17  
+- Spring Boot 3  
+- Spring Web  
+- Spring Data JPA  
+- MySQL  
+- Lombok  
+
+### Frontend (Next.js)
+
+- Next.js 14  
+- TypeScript  
+- Tailwind CSS  
+- Shadcn UI  
+
+---
+
+## Como executar o projeto
+
+### 1. Clone os repositórios:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Backend
+git clone https://github.com/dregoncalves/todo-api
+
+# Frontend
+git clone https://github.com/dregoncalves/todo-app
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Configure o banco MySQL no Workbench com:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```sql
+CREATE DATABASE tododb;
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 3. Configure o `application.properties` do backend:
 
-## Learn More
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/tododb
+spring.datasource.username=seu_usuario
+spring.datasource.password=sua_senha
+spring.jpa.hibernate.ddl-auto=update
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 4. Execute os projetos:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# Backend
+cd todo-api
+./mvnw spring-boot:run
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Frontend
+cd todo-app
+npm install
+npm run dev
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Endpoints da API
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```http
+GET    /api/tasks        -> Listar tarefas  
+POST   /api/tasks        -> Criar tarefa  
+PUT    /api/tasks/{id}   -> Atualizar tarefa  
+DELETE /api/tasks/{id}   -> Remover tarefa  
+```
+
+### Exemplo JSON para POST:
+
+```json
+{
+  "title": "Estudar Spring Boot",
+  "completed": false
+}
+```
+
+---
+
+## Links dos Repositórios
+
+- [Backend (Spring Boot)](https://github.com/dregoncalves/todo-api)  
+- [Frontend (Next.js)](https://github.com/dregoncalves/todo-app)
